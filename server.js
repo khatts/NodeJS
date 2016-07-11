@@ -1,4 +1,6 @@
 var express    = require('express');        // call express
+
+var http = require('http');
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
@@ -12,10 +14,10 @@ var port = process.env.PORT || 3456;        // set our port
 var mongoose   = require('mongoose');
 
 //provide a sensible default for local development
-var mongodb_connection_string = 'mongodb://127.0.0.1:27017/selfie' ;
+var mongodb_connection_string = 'mongodb://127.0.0.1:27017/selfietrigger' ;
 //take advantage of openshift env vars when available:
 if(process.env.OPENSHIFT_MONGODB_DB_URL){
-  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + selfie;
+  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + selfietrigger;
 }
 
 mongoose.connect(mongodb_connection_string); // connect to our database
@@ -110,9 +112,12 @@ app.use('/api', router);
 
 // START THE SERVER
 // =============================================================================
-app.listen(port);
-console.log("Listening on " + server_ip_address + ", server_port " + server_port)
-console.log('Magic happens on port ' + port);
+
+server.listen(server_port, server_ip_address, function () {
+	  console.log( "Listening on " + server_ip_address + ", server_port " + port )
+	});
+//console.log("Listening on " + ip + ", server_port " + port)
+console.log('Magic happens on port ' + server_port);
 
 
 //Database
