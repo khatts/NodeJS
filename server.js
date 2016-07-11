@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;        // set our port
+var port = process.env.PORT || 3456;        // set our port
 
 var mongoose   = require('mongoose');
 
@@ -20,7 +20,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_URL){
 
 mongoose.connect(mongodb_connection_string); // connect to our database
 
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 3456
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
 /**
